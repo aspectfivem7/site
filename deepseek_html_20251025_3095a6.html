@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phantom - Sua Loja de Emuladores</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(18, 18, 18, 0.95);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 16px;
+        }
+
+        nav ul li a:hover {
+            color: #6c63ff;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0;
+            text-align: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23121212"/><path d="M0 0L100 100M100 0L0 100" stroke="%23333" stroke-width="1"/></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: #e0e0e0;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #6c63ff;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #5a52d5;
+            transform: translateY(-3px);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 36px;
+            color: #ffffff;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #b0b0b0;
+            font-size: 18px;
+        }
+
+        /* Emuladores */
+        .emuladores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .emulador-card {
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .emulador-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .emulador-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .emulador-card p {
+            color: #b0b0b0;
+            margin-bottom: 20px;
+        }
+
+        .emulador-card .btn {
+            background-color: #333;
+        }
+
+        .emulador-card .btn:hover {
+            background-color: #6c63ff;
+        }
+
+        /* Downloads */
+        .downloads {
+            background-color: #1a1a1a;
+        }
+
+        .downloads-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .download-item {
+            background-color: #252525;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+
+        .download-item:hover {
+            background-color: #2d2d2d;
+        }
+
+        .download-item h3 {
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .download-item p {
+            color: #b0b0b0;
+            margin-bottom: 15px;
+        }
+
+        /* Sobre */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content p {
+            margin-bottom: 20px;
+            color: #e0e0e0;
+            font-size: 18px;
+        }
+
+        /* Termos */
+        .termos-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #1e1e1e;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        .termos-content h3 {
+            margin: 20px 0 10px;
+            color: #ffffff;
+        }
+
+        .termos-content p {
+            margin-bottom: 15px;
+            color: #b0b0b0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0a0a0a;
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            color: #ffffff;
+            font-size: 18px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #b0b0b0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: #6c63ff;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 20px;
+                flex-direction: column;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            .mobile-menu {
+                display: block;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="https://cdn.discordapp.com/attachments/1429535065708171374/1430000690503356466/1760825280365.png" alt="Phantom Logo">
+                </div>
+                <div class="mobile-menu">☰</div>
+                <nav>
+                    <ul>
+                        <li><a href="#sobre">Sobre</a></li>
+                        <li><a href="#termos">Termos</a></li>
+                        <li><a href="#downloads">Downloads</a></li>
+                        <li><a href="#sorteios">Sorteios</a></li>
+                        <li><a href="https://discord.gg/R3dkx6XU2T" target="_blank">Discord</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Bem-vindo à Phantom</h1>
+            <p>Sua loja confiável para emuladores e downloads gratuitos. Obtenha os melhores emuladores para uma experiência de jogo excepcional.</p>
+            <a href="#downloads" class="btn">Ver Downloads</a>
+        </div>
+    </section>
+
+    <!-- Emuladores Recomendados -->
+    <section id="emuladores">
+        <div class="container">
+            <h2 class="section-title">Emuladores Recomendados</h2>
+            <p class="section-subtitle">Os melhores emuladores para jogar Free Fire e outros jogos</p>
+            
+            <div class="emuladores-grid">
+                <div class="emulador-card">
+                    <h3>MSI 5.9.300.6315</h3>
+                    <p>Versão estável com excelente desempenho para jogos pesados.</p>
+                    <a href="https://drive.google.com/drive/folders/1BOZtmlssL3irFNay5g3ndiAAgWw-mgk9?usp=sharing" class="btn" target="_blank">Download</a>
+                </div>
+                <div class="emulador-card">
+                    <h3>MSI 5.12</h3>
+                    <p>Versão otimizada para jogos como Free Fire com melhor compatibilidade.</p>
+                    <a href="https://drive.google.com/drive/folders/1BOZtmlssL3irFNay5g3ndiAAgWw-mgk9?usp=sharing" class="btn" target="_blank">Download</a>
+                </div>
+                <div class="emulador-card">
+                    <h3>MSI 5.21</h3>
+                    <p>Versão mais recente com recursos avançados e melhor estabilidade.</p>
+                    <a href="https://drive.google.com/drive/folders/1BOZtmlssL3irFNay5g3ndiAAgWw-mgk9?usp=sharing" class="btn" target="_blank">Download</a>
+                </div>
+            </div>
+            
+            <div class="emuladores-grid" style="margin-top: 30px;">
+                <div class="emulador-card">
+                    <h3>Bluestacks 5.9.620.1002</h3>
+                    <p>Versão estável com interface intuitiva e excelente desempenho.</p>
+                    <a href="https://drive.google.com/drive/folders/18D9LPKreo13xBnZEYrzeHx-vyZuFELF0?usp=sharing" class="btn" target="_blank">Download</a>
+                </div>
+                <div class="emulador-card">
+                    <h3>Bluestacks 5.10.210.1003</h3>
+                    <p>Versão com melhorias de desempenho e compatibilidade.</p>
+                    <a href="https://drive.google.com/drive/folders/18D9LPKreo13xBnZEYrzeHx-vyZuFELF0?usp=sharing" class="btn" target="_blank">Download</a>
+                </div>
+                <div class="emulador-card">
+                    <h3>Bluestacks 5.12.0.1085</h3>
+                    <p>Versão otimizada para jogos com alta taxa de quadros.</p>
+                    <a href="https://drive.google.com/drive/folders/18D9LPKreo13xBnZEYrzeHx-vyZuFELF0?usp=sharing" class="btn" target="_blank">Download</a>
+                </div>
+                <div class="emulador-card">
+                    <h3>Bluestacks 5.22.75.1026</h3>
+                    <p>Versão mais recente com recursos avançados e melhor estabilidade.</p>
+                    <a href="https://drive.google.com/drive/folders/18D9LPKreo13xBnZEYrzeHx-vyZuFELF0?usp=sharing" class="btn" target="_blank">Download</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Downloads -->
+    <section id="downloads" class="downloads">
+        <div class="container">
+            <h2 class="section-title">Downloads Gratuitos</h2>
+            <p class="section-subtitle">Baixe os melhores emuladores e jogos gratuitamente</p>
+            
+            <div class="downloads-grid">
+                <div class="download-item">
+                    <h3>MSI Emulators</h3>
+                    <p>Todas as versões do MSI em um só lugar</p>
+                    <a href="https://drive.google.com/drive/folders/1BOZtmlssL3irFNay5g3ndiAAgWw-mgk9?usp=sharing" class="btn" target="_blank">Acessar</a>
+                </div>
+                <div class="download-item">
+                    <h3>Bluestacks Emulators</h3>
+                    <p>Todas as versões do Bluestacks disponíveis</p>
+                    <a href="https://drive.google.com/drive/folders/18D9LPKreo13xBnZEYrzeHx-vyZuFELF0?usp=sharing" class="btn" target="_blank">Acessar</a>
+                </div>
+                <div class="download-item">
+                    <h3>Free Fire</h3>
+                    <p>Free Fire V7A ATT - Versão otimizada</p>
+                    <a href="https://drive.google.com/file/d/1OZTd3vUO4FbMfmkkzK0xHhzHG_1HvGGY/view?usp=sharing" class="btn" target="_blank">Download</a>
+                </div>
+                <div class="download-item">
+                    <h3>Carteira de Trabalho</h3>
+                    <p>Arquivo ZIP - Senha: 123 | Chave: 4002-8922</p>
+                    <a href="https://cdn.discordapp.com/attachments/1428143362682261504/1430715120757243966/Carteira_de_trabalho.zip?ex=68fe148a&is=68fcc30a&hm=2bf7d79026d75eca8a2ea97a9b66b195a600d30afafd93b733cbc44d0a7a5e3c&" class="btn" target="_blank">Download</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre -->
+    <section id="sobre">
+        <div class="container">
+            <h2 class="section-title">Sobre a Phantom</h2>
+            <div class="about-content">
+                <p>A Phantom é uma loja especializada em oferecer os melhores emuladores e downloads gratuitos para a comunidade gamer. Nosso objetivo é proporcionar uma experiência de jogo excepcional com emuladores otimizados e estáveis.</p>
+                <p>Trabalhamos com as versões mais recentes e estáveis dos principais emuladores do mercado, garantindo compatibilidade e desempenho para todos os tipos de jogos.</p>
+                <p>Além disso, oferecemos suporte através da nossa comunidade no Discord, onde você pode tirar dúvidas, reportar problemas e participar de sorteios exclusivos.</p>
+                <a href="https://discord.gg/R3dkx6XU2T" class="btn" target="_blank">Junte-se ao nosso Discord</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Termos -->
+    <section id="termos" class="downloads">
+        <div class="container">
+            <h2 class="section-title">Termos de Uso</h2>
+            <div class="termos-content">
+                <h3>1. Aceitação dos Termos</h3>
+                <p>Ao acessar e usar os serviços da Phantom, você concorda em cumprir e estar vinculado a estes termos de uso.</p>
+                
+                <h3>2. Uso dos Emuladores</h3>
+                <p>Os emuladores fornecidos são para uso pessoal e não comercial. A Phantom não se responsabiliza pelo uso indevido dos softwares.</p>
+                
+                <h3>3. Downloads</h3>
+                <p>Todos os downloads são fornecidos gratuitamente. A Phantom verifica a segurança de todos os arquivos, mas recomenda que os usuários mantenham seus sistemas protegidos com antivírus atualizado.</p>
+                
+                <h3>4. Propriedade Intelectual</h3>
+                <p>Os emuladores e jogos são propriedade de seus respectivos desenvolvedores. A Phantom apenas facilita o acesso a essas ferramentas.</p>
+                
+                <h3>5. Limitação de Responsabilidade</h3>
+                <p>A Phantom não se responsabiliza por quaisquer danos diretos, indiretos, incidentais ou consequenciais resultantes do uso ou incapacidade de usar nossos serviços.</p>
+                
+                <h3>6. Alterações nos Termos</h3>
+                <p>Reservamo-nos o direito de modificar estes termos a qualquer momento. As alterações entrarão em vigor imediatamente após sua publicação no site.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sorteios -->
+    <section id="sorteios">
+        <div class="container">
+            <h2 class="section-title">Sorteios</h2>
+            <div class="about-content">
+                <p>Participe dos nossos sorteios exclusivos para a comunidade Phantom! Oferecemos prêmios como gift cards, jogos, assinaturas e muito mais.</p>
+                <p>Para participar, basta estar em nosso servidor do Discord e seguir as instruções dos sorteios que são anunciados regularmente.</p>
+                <p>Fique atento aos nossos canais oficiais para não perder nenhuma oportunidade!</p>
+                <a href="https://discord.gg/R3dkx6XU2T" class="btn" target="_blank">Participar dos Sorteios</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Phantom</h3>
+                    <ul>
+                        <li><a href="#sobre">Sobre nós</a></li>
+                        <li><a href="#termos">Termos de uso</a></li>
+                        <li><a href="#sorteios">Sorteios</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Downloads</h3>
+                    <ul>
+                        <li><a href="#emuladores">Emuladores</a></li>
+                        <li><a href="#downloads">Downloads gratuitos</a></li>
+                        <li><a href="https://cdn.discordapp.com/attachments/1428451861756907660/1428452316364800190/FREE_FIRE_V7A_ATT.xapk?ex=68f7d363&is=68f681e3&hm=9b0098a1999d58eeecb6a70087669879ebb088705cb732bdaf27e3cdc6a4569a&" target="_blank">Free Fire</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul>
+                        <li><a href="https://discord.gg/R3dkx6XU2T" target="_blank">Discord</a></li>
+                        <li><a href="#sorteios">Sorteios</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Phantom. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu mobile
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('nav ul').classList.toggle('active');
+        });
+
+        // Smooth scroll para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
